@@ -11,6 +11,7 @@ import br.com.smashcode.babycare.request.AccountRequest;
 import br.com.smashcode.babycare.response.AccountResponse;
 import br.com.smashcode.babycare.response.SuccessResponse;
 import br.com.smashcode.babycare.service.IAccountService;
+import br.com.smashcode.babycare.service.IEmailService;
 import br.com.smashcode.babycare.utils.UserAccountUtils;
 import br.com.smashcode.babycare.utils.UserProfileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,9 @@ public class AccountServiceImpl implements IAccountService {
 
     @Autowired
     private IUserProfileRepository userProfileRepository;
+
+    @Autowired
+    private IEmailService emailService;
 
 
     @Override
@@ -50,6 +54,14 @@ public class AccountServiceImpl implements IAccountService {
 
         // retornar um dto com os dados.
         var response = new AccountResponse(profilePersisted);
+
+        // enviar um email de agradecimentos
+        var send = emailService.sendEmail(
+                response.getEmail(),
+                "Obrigado por acreditar em nós!",
+                "A equipe da Baby Care agradece profundamente por você ter confiado no nosso serviço!"
+        );
+
         return response;
     }
 
