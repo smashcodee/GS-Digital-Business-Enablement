@@ -1,0 +1,39 @@
+version: '3.4'
+services:
+  mqtt:
+    image: eclipse-mosquitto:2
+    hostname: mosquitto
+    container_name: mosquitto
+    restart: unless-stopped
+    volumes:
+      - ./config:/mosquitto/config
+    networks:
+      - babycarenet
+    ports:
+      - "1883:1883"
+      - "9001:9001"
+
+  rest-api:
+    depends_on:
+      - mqtt
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    environment:
+      - DOCKER_MQTT_BROKER=tcp://mqtt:1883
+    working_dir: /usr/src/babycare-rest
+    container_name: babycare-rest-api
+    restart: on-failure
+    ports:
+      - 8080:8080
+    networks:
+      - babycarenet
+
+volumes:
+  config:
+
+networks:
+  babycarenet:
+    driver: bridge
