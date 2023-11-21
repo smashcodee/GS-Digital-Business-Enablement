@@ -27,9 +27,24 @@ services:
     container_name: babycare-rest-api
     restart: on-failure
     ports:
-      - 8080:8080
+      - "8080:8080"
     networks:
       - babycarenet
+
+  device-iot-mock:
+    depends_on:
+      - rest-api
+    build:
+      context: ./deviceIoT-Simulation
+      dockerfile: Dockerfile
+    environment:
+      - DOCKER_MQTT_BROKER=tcp://mqtt:1883
+    working_dir: /usr/src/app/deviceIoT
+    container_name: device-iot-mock
+    restart: on-failure
+    networks:
+      - babycarenet
+
 
 volumes:
   config:

@@ -10,4 +10,6 @@ import lombok.Data;
 public class DeviceConnetionRequest {
     private UUID projectId;
     private String deviceId;
+
+    public DeviceConnetionRequest() { super(); };
 }

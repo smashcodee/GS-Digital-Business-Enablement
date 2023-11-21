@@ -27,7 +27,7 @@ public class DeviceConnectionServiceImpl implements IDeviceConnectionService {
             throw new BabyProjectNotExistsException("Nenhum projeto foi encontrado com esse id.");
         }
 
-        var project = babyProjectRepository.findById(request.getProjectId()).get();
+        babyProjectRepository.findById(request.getProjectId()).get();
         
 
         String initalMessageAPI = "start";
