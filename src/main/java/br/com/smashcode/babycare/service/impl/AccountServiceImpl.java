@@ -56,11 +56,13 @@ public class AccountServiceImpl implements IAccountService {
         var response = new AccountResponse(profilePersisted);
 
         // enviar um email de agradecimentos
-        var send = emailService.sendEmail(
+        emailService.sendEmail(
                 response.getEmail(),
                 "Obrigado por acreditar em nós!",
                 "A equipe da Baby Care agradece profundamente por você ter confiado no nosso serviço!"
         );
+
+
 
         return response;
     }
@@ -89,7 +91,7 @@ public class AccountServiceImpl implements IAccountService {
         accountEntity.setEmail(email);
 
         // editando entidade da conta
-        var accountUpdated = userAccountRepository.saveAndFlush(accountEntity);
+        userAccountRepository.saveAndFlush(accountEntity);
         return new SuccessResponse("Email editado com sucesso.");
     }
 
@@ -125,7 +127,7 @@ public class AccountServiceImpl implements IAccountService {
         var accountEntity = userAccountRepository.findById(accountId).get();
         accountEntity.setUsername(username);
 
-        var accountUpdated = userAccountRepository.saveAndFlush(accountEntity);
+        userAccountRepository.saveAndFlush(accountEntity);
 
         return new SuccessResponse("Username alterado com sucesso.");
     }
@@ -144,7 +146,7 @@ public class AccountServiceImpl implements IAccountService {
         var profile = accountEntity.getProfile();
         profile.setFullName(fullName);
 
-        var profileUpdated = userProfileRepository.saveAndFlush(profile);
+        userProfileRepository.saveAndFlush(profile);
 
         return new SuccessResponse("Nome do usuário alterado com sucesso.");
     }

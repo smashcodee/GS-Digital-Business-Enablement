@@ -1,6 +1,5 @@
 package br.com.smashcode.babycare.response;
 
-import br.com.smashcode.babycare.model.UserAccountEntity;
 import br.com.smashcode.babycare.model.UserProfileEntity;
 import lombok.Data;
 
