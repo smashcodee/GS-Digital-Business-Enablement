@@ -49,7 +49,7 @@ let intervalId;
 const startLoop = () => {
   intervalId = setInterval(() => {
     client.publish(outgoingTopic, simulateHeartRate());
-  }, 2000);
+  }, 400);
 };
 
 const stopLoop = () => {
