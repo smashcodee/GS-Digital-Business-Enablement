@@ -15,5 +15,8 @@ public abstract class EnvLoader {
         /* Java Mail Sender Load */
         System.setProperty("spring.mail.username", env.get("SPRING_MAIL_USERNAME"));
         System.setProperty("spring.mail.password", env.get("SPRING_MAIL_PASSWORD"));
+
+        /** JWT Load */
+        System.setProperty("jwt.secret", env.get("JWT_SECRET"));
     }
 }

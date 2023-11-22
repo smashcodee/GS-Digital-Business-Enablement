@@ -14,7 +14,9 @@ import br.com.smashcode.babycare.service.IAccountService;
 import br.com.smashcode.babycare.service.IEmailService;
 import br.com.smashcode.babycare.utils.UserAccountUtils;
 import br.com.smashcode.babycare.utils.UserProfileUtils;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -31,6 +33,9 @@ public class AccountServiceImpl implements IAccountService {
     @Autowired
     private IEmailService emailService;
 
+    @Autowired
+    private PasswordEncoder encoder;
+
 
     @Override
     public AccountResponse createAccount(AccountRequest request) {
@@ -44,6 +49,10 @@ public class AccountServiceImpl implements IAccountService {
 
         /* Criar um user_account */
         UserAccountEntity accountEntity = UserAccountUtils.toEntity(request);
+        
+        // criptografando a senha
+        accountEntity.setPassword(encoder.encode(accountEntity.getPassword()));
+
         // salvando conta de usuário no banco de dados.
         var accountPersisted = userAccountRepository.saveAndFlush(accountEntity);
 
