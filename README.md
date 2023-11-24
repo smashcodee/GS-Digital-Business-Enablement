@@ -27,13 +27,13 @@ _Além da API utilizei a ferramenta docker para subir outros containers que comp
 - [Spring Boot.](https://spring.io/projects/spring-boot)
 - [Docker.]()
 - [Env Configuration.]()
-- [H2 Database.]()
+- [Oracle Database.]()
 - [MQTT Broker Mosquitto]()
 - [WebSocket]()
 - [SMTP Mail Service]()
 - [Azure SQL Server DB (Cloud API)]()
 
-<small>A API em produção (nuvem) está conectada em um banco de dados em nuvem na azure cloud. Porém como queremos manter esse projeto open source optamos por deixar o banco em memória (H2 Database) nessa API do github. Mesmo assim você consegue rodar e testar a API localmente, basta seguir as instruções.</small>
+<small>A API em produção (nuvem) está conectada em um banco de dados em nuvem na azure cloud. Porém como queremos manter esse projeto open source optamos por deixar o banco em nuvem da fiap(Oracle Database) nessa API do github. Mesmo assim você consegue rodar e testar a API localmente, basta seguir as instruções.</small>
 
 
 ## Dependências do projeto (Spring Boot)
@@ -42,7 +42,7 @@ _Além da API utilizei a ferramenta docker para subir outros containers que comp
 3. DevTools.
 4. Lombok.
 5. Spring Boot Tests.
-6. H2 Driver.
+6. Oracle Database.
 7. Spring Boot Validation.
 8. Spring Mail
 9. Dotenv Java
@@ -84,10 +84,10 @@ _Na raiz do projeto adicione um arquivo `.env` com essas configurações:_
 #######################################
 # Datasource Database Dev Config
 #######################################
-SPRING_DATASOURCE_DB_DEV_URL=jdbc:h2:mem:babycare
-SPRING_DATASOURCE_DB_DEV_USERNAME=sa
-SPRING_DATASOURCE_DB_DEV_PASSWORD=
-SPRING_DATASOURCE_DB_DEV_DRIVER=org.h2.Driver
+SPRING_DATASOURCE_DB_DEV_URL=jdbc:oracle:thin:@oracle.fiap.com.br:1521:orcl
+SPRING_DATASOURCE_DB_DEV_USERNAME=rm93610 
+SPRING_DATASOURCE_DB_DEV_PASSWORD=020404
+SPRING_DATASOURCE_DB_DEV_DRIVER=oracle.jdbc.OracleDriver
 
 
 #######################################
